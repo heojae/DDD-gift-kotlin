@@ -1,0 +1,32 @@
+server:
+  port: 18080
+  shutdown: graceful
+
+spring:
+  lifecycle:
+    timeout-per-shutdown-phase: 20s
+  jpa:
+    show-sql: true
+    hibernate:
+      ddl-auto: none
+  datasource:
+    hikari:
+      driver-class-name: com.mysql.cj.jdbc.Driver
+      jdbc-url: jdbc:mysql://localhost:23306/order?serverTimezone=UTC&characterEncoding=UTF-8
+      username: order-svc
+      password: order-pass
+  flyway:
+    user: order-svc
+    password: order-pass
+    schemas: order
+    url: jdbc:mysql://localhost:23306/order?serverTimezone=UTC&characterEncoding=UTF-8
+    enabled: true
+
+example.order:
+  base-url: http://localhost:8080/
+
+# aws 의 access-key, secret-key 를 반영해야 정상 동작함
+cloud:
+  aws:
+    access-key: access-key
+    secret-key: secret-key
